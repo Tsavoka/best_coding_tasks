@@ -1,0 +1,25 @@
+# На вход программе подается строка текста на английском языке, в которой нужно 
+# зашифровать все слова. Каждое слово строки следует зашифровать с помощью 
+# шифра Цезаря (циклического сдвига на длину этого слова). Строчные буквы при 
+# этом остаются строчными, а прописные – прописными. Гарантируется, что между 
+# различными словами присутствует один пробел.
+# Символы, не являющиеся английскими буквами, не изменяются.
+
+from string import ascii_lowercase as al, ascii_uppercase as ap
+
+
+def ave_caesar(string):
+    rez = []
+    string = string.split()
+    for word in string:
+        rot = sum(i.isalpha() for i in word)
+        temp = [al[(al.index(i)+rot)%26] if i.islower() else i for i in word]
+        temp = [ap[(ap.index(i)+rot)%26] if i.isupper() else i for i in temp]
+        rez.append(''.join(temp))
+    return ' '.join(rez)
+
+print(ave_caesar('Day, mice. "Year" is a mistake!'))    # Gdb, qmgi. "Ciev" ku b tpzahrl!
+print(ave_caesar("my name is Python!"))                 # oa reqi ku Veznut!
+	
+print(ave_caesar("Hello, my friend! How are you? =)"))
+print(ave_caesar("5 + 5 * 10 - 12 // 12 = 54"))
